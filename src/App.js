@@ -9,6 +9,7 @@ import Blog from "./views/blog";
 import BlogSingle from "./views/blog-single";
 import Contact from "./views/contact";
 import Courses from "./views/courses";
+import CourseDetail from "./views/course_detail";
 import Dashboard from "./views/dashboard";
 import Home from "./views/home";
 import Pricing from "./views/pricing";
@@ -26,16 +27,17 @@ export default class App extends React.Component {
   componentDidMount() {
     demoAsyncCall().then(() => this.setState({ loading: false }));
   }
+  
   render() {
     const { loading } = this.state;
-    if (loading) { 
+    if (loading) {
       return <div id="preloader">
         <div className="loader-container">
           <div className="progress-br float shadow">
             <div className="progress__item"></div>
           </div>
         </div>
-      </div>; 
+      </div>;
     }
     return (
       <Router>
@@ -56,7 +58,7 @@ export default class App extends React.Component {
             <Route path="/blog">
               <Blog />
             </Route>
-            <Route path="/courses">
+            <Route exact path="/courses">
               <Courses />
             </Route>
             <Route path="/dashboard">
@@ -71,7 +73,12 @@ export default class App extends React.Component {
             <Route path="/teachers">
               <Teachers />
             </Route>
-
+            <Route exact path="/course-detail">
+              <CourseDetail />
+            </Route>
+            <Route>
+              <h2>böyle bir route yok kardeşim. Geri Bas</h2>
+            </Route>
           </Switch>
         </div>
       </Router>
